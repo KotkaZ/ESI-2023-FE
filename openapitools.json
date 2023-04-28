@@ -5,7 +5,7 @@
       "version": "6.1.0",
       "generators": {
         "authApi": {
-          "generatorName": "typescript-axios",
+          "generatorName": "typescript-fetch",
           "inputSpec": "specs/auth-api.yaml",
           "output": "generated/auth",
           "apiPackage": "com.esi.auth.api",
@@ -17,7 +17,7 @@
           }
         },
         "bookingsApi": {
-          "generatorName": "typescript-axios",
+          "generatorName": "typescript-fetch",
           "inputSpec": "specs/bookings-api.yaml",
           "output": "generated/bookings",
           "apiPackage": "com.esi.bookings.api",
@@ -29,7 +29,7 @@
           }
         },
         "checkingApi": {
-          "generatorName": "typescript-axios",
+          "generatorName": "typescript-fetch",
           "inputSpec": "specs/checking-api.yaml",
           "output": "generated/checking",
           "apiPackage": "com.esi.checking.api",
@@ -41,7 +41,7 @@
           }
         },
         "notificationsApi": {
-          "generatorName": "typescript-axios",
+          "generatorName": "typescript-fetch",
           "inputSpec": "specs/notifications-api.yaml",
           "output": "generated/notifications",
           "apiPackage": "com.esi.notifications.api",
@@ -53,7 +53,7 @@
           }
         },
         "paymentsApi": {
-          "generatorName": "typescript-axios",
+          "generatorName": "typescript-fetch",
           "inputSpec": "specs/payments-api.yaml",
           "output": "generated/payments",
           "apiPackage": "com.esi.payments.api",
@@ -65,7 +65,7 @@
           }
         },
         "roomsApi": {
-          "generatorName": "typescript-axios",
+          "generatorName": "typescript-fetch",
           "inputSpec": "specs/rooms-api.yaml",
           "output": "generated/rooms",
           "apiPackage": "com.esi.rooms.api",
@@ -77,7 +77,7 @@
           }
         },
         "supportApi": {
-          "generatorName": "typescript-axios",
+          "generatorName": "typescript-fetch",
           "inputSpec": "specs/support-api.yaml",
           "output": "generated/support",
           "apiPackage": "com.esi.support.api",
