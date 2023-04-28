@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: Payments API
+  version: 0.0.1
+  description: |
+    The Payments API example spec.
+
+servers:
+  - url: http://localhost:8080/api/payments
+    description: Local development server
+externalDocs:
+  url: https://swagger.io/specification/
+  description: Find more information about OAS3.0 standard.
+tags:
+  - name: Payments
+    description: API containing information about payments
+paths:
+  /test:
+    get:
+      operationId: test
+      tags:
+        - Payments
+      summary: Test endpoint
+      description: Test endpoint
+      responses:
+        '200':
+          description: Test successful.
+#  /{id}/pay:
+#    patch:
+#      operationId: payPayment
+#      tags:
+#        - Payments
+#      summary: Pay the payment
+#      description: Pay the payment
+#      parameters:
+#        - name: id
+#          in: path
+#          description: Payment id
+#          required: true
+#          schema:
+#            type: integer
+#            minimum: 1
+#      responses:
+#        '200':
+#          description: Payment was paid.
+#        '404':
+#          description: Payment id not found.
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/Error'
+#        '406':
+#          description: Payment was unsuccessful.
+#          content:
+#            application/json:
+#              schema:
+#                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+          minimum: 0

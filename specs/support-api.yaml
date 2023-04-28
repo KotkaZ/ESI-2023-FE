@@ -1,0 +1,174 @@
+openapi: 3.0.3
+info:
+  title: Support API
+  version: 0.0.1
+  description: |
+    The Support API example spec.
+
+servers:
+  - url: http://localhost:8080/api/support
+    description: Local development server
+externalDocs:
+  url: https://swagger.io/specification/
+  description: Find more information about OAS3.0 standard.
+tags:
+  - name: Support
+    description: API containing information about support services
+paths:
+  /dirty:
+    get:
+      operationId: getCleaningRequests
+      tags:
+        - Support
+      summary: Query all rooms that have requests for cleaning.
+      description: Query all rooms that have requests for cleaning.
+      responses:
+        '200':
+          description: Returned a list of room numbers (ids) with cleaning requests ids.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DirtyEntity'
+  /{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Room id
+        required: true
+        schema:
+          type: integer
+          minimum: 0
+    get:
+      operationId: getRequestById
+      tags:
+        - Support
+      summary: Query a support request by id.
+      description: Collects a support request with given id.
+      responses:
+        '200':
+          description: Returned a support request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Support'
+        '404':
+          description: Room not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{id}/start:
+    parameters:
+      - name: id
+        in: path
+        description: Cleaning request id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    put:
+      operationId: startCleaningRequest
+      tags:
+        - Support
+      summary: Marks cleaning request as started.
+      description: Marks cleaning request as started.
+      parameters:
+        - name: assignedTo
+          in: query
+          description: User id assigned to the task
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '201':
+          description: Cleaning request marked as started.
+        '404':
+          description: Cleaning request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{id}/end:
+    parameters:
+      - name: id
+        in: path
+        description: Cleaning request id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    put:
+      operationId: endCleaningRequest
+      tags:
+        - Support
+      summary: Marks cleaning request as ended.
+      description: Marks cleaning request as ended.
+      responses:
+        '201':
+          description: Cleaning request marked as ended.
+        '404':
+          description: Cleaning request not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Support:
+      properties:
+        requestId:
+          type: integer
+          description: Cleaning request id
+          example: 1
+        bookingId:
+          type: integer
+          description: Booking id
+          example: 123
+        assignedTo:
+          type: integer
+          description: User id assigned to the request
+          example: 2
+        requestedAt:
+          type: string
+          format: date-time
+          description: date and time the request
+        cleaningStartedAt:
+          type: string
+          format: date-time
+          description: date and time of the cleaning started
+        cleanedAt:
+          type: string
+          format: date-time
+          description: date and time of the cleaning finished
+    DirtyEntity:
+      type: object
+      properties:
+        requestId:
+          type: integer
+          description: Cleaning request id
+          example: 1
+        bookingId:
+          type: integer
+          description: Booking id
+          example: 123
+    CleaningRequestCreate:
+        type: object
+        properties:
+          bookingId:
+            type: integer
+            description: Booking id
+            example: 1
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+          minimum: 0

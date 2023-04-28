@@ -1,0 +1,180 @@
+openapi: 3.0.3
+info:
+  title: Checking API
+  version: 0.0.1
+  description: |
+    The Checking API supports simple actions with the cleaning process.
+
+servers:
+  - url: http://localhost:8080/api/checking
+    description: Local development server
+externalDocs:
+  url: https://swagger.io/specification/
+  description: Find more information about OAS3.0 standard.
+tags:
+  - name: Checking
+    description: API containing information about checking
+paths:
+  /{bookingId}:
+    parameters:
+      - name: bookingId
+        in: path
+        description: Booking id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    get:
+      operationId: getCheckingById
+      tags:
+        - Checking
+      summary: Retrieve by id
+      description: Retrieve by id
+      responses:
+        '200':
+          description: Returned a checking entity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Checking'
+        '404':
+          description: Booking not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{bookingId}/checkin:
+    parameters:
+      - name: bookingId
+        in: path
+        description: Booking id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    post:
+      operationId: checkinToRooms
+      tags:
+        - Checking
+      summary: Create a checkin request.
+      description: Creates a check-in request with a certain booking Id
+      responses:
+        '201':
+          description: Check-in completed.
+        '404':
+          description: Booking not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{bookingId}/checkout:
+    parameters:
+      - name: bookingId
+        in: path
+        description: Booking id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    put:
+      operationId: checkoutFromRooms
+      tags:
+        - Checking
+      summary: Check-out from the room
+      description: Check outs from the room within a certain booking.
+      responses:
+        '201':
+          description: Check-out completed.
+        '404':
+          description: Booking not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /{bookingId}/code:
+    parameters:
+      - name: bookingId
+        in: path
+        description: Booking id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+    put:
+      operationId: generateCode
+      tags:
+        - Checking
+      summary: Generates entry code for the room
+      description: Generates entry code for the room for a specific booking.
+      responses:
+        '201':
+          description: Code generated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        '404':
+          description: Booking not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: getCode
+      tags:
+          - Checking
+      summary: Gets entry code for the room
+      description: Gets entry code for the room for a specific booking.
+      responses:
+        '200':
+          description: Code generated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+        '404':
+          description: Booking not found.
+          content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Checking:
+      type: object
+      properties:
+        bookingId:
+          type: integer
+          description: id of the booking
+        roomId:
+          type: integer
+          description: id of the room
+        checkInAt:
+          type: string
+          format: date-time
+          description: date and time of the check-in
+        checkOutAt:
+          type: string
+          format: date-time
+          description: date and time of the check-out
+        code:
+          type: string
+          description: Code for the entry to room(s)
+    Code:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code for the entry to the room.
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Error message
+        code:
+          type: integer
+          description: Error code
+          minimum: 0

@@ -1,0 +1,93 @@
+{
+    "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+    "spaces": 2,
+    "generator-cli": {
+      "version": "6.1.0",
+      "generators": {
+        "authApi": {
+          "generatorName": "typescript-axios",
+          "inputSpec": "specs/auth-api.yaml",
+          "output": "generated/auth",
+          "apiPackage": "com.esi.auth.api",
+          "modelPackage": "com.esi.auth.dto",
+          "additionalProperties": {
+            "supportsES6": true,
+            "stringEnums": true,
+            "enumPropertyNaming": "UPPERCASE"
+          }
+        },
+        "bookingsApi": {
+          "generatorName": "typescript-axios",
+          "inputSpec": "specs/bookings-api.yaml",
+          "output": "generated/bookings",
+          "apiPackage": "com.esi.bookings.api",
+          "modelPackage": "com.esi.bookings.dto",
+          "additionalProperties": {
+            "supportsES6": true,
+            "stringEnums": true,
+            "enumPropertyNaming": "UPPERCASE"
+          }
+        },
+        "checkingApi": {
+          "generatorName": "typescript-axios",
+          "inputSpec": "specs/checking-api.yaml",
+          "output": "generated/checking",
+          "apiPackage": "com.esi.checking.api",
+          "modelPackage": "com.esi.checking.dto",
+          "additionalProperties": {
+            "supportsES6": true,
+            "stringEnums": true,
+            "enumPropertyNaming": "UPPERCASE"
+          }
+        },
+        "notificationsApi": {
+          "generatorName": "typescript-axios",
+          "inputSpec": "specs/notifications-api.yaml",
+          "output": "generated/notifications",
+          "apiPackage": "com.esi.notifications.api",
+          "modelPackage": "com.esi.notifications.dto",
+          "additionalProperties": {
+            "supportsES6": true,
+            "stringEnums": true,
+            "enumPropertyNaming": "UPPERCASE"
+          }
+        },
+        "paymentsApi": {
+          "generatorName": "typescript-axios",
+          "inputSpec": "specs/payments-api.yaml",
+          "output": "generated/payments",
+          "apiPackage": "com.esi.payments.api",
+          "modelPackage": "com.esi.payments.dto",
+          "additionalProperties": {
+            "supportsES6": true,
+            "stringEnums": true,
+            "enumPropertyNaming": "UPPERCASE"
+          }
+        },
+        "roomsApi": {
+          "generatorName": "typescript-axios",
+          "inputSpec": "specs/rooms-api.yaml",
+          "output": "generated/rooms",
+          "apiPackage": "com.esi.rooms.api",
+          "modelPackage": "com.esi.rooms.dto",
+          "additionalProperties": {
+            "supportsES6": true,
+            "stringEnums": true,
+            "enumPropertyNaming": "UPPERCASE"
+          }
+        },
+        "supportApi": {
+          "generatorName": "typescript-axios",
+          "inputSpec": "specs/support-api.yaml",
+          "output": "generated/support",
+          "apiPackage": "com.esi.support.api",
+          "modelPackage": "com.esi.support.dto",
+          "additionalProperties": {
+            "supportsES6": true,
+            "stringEnums": true,
+            "enumPropertyNaming": "UPPERCASE"
+          }
+        }
+      }
+    }
+  }
