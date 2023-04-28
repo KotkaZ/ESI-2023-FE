@@ -1,12 +1,14 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
+  "include": ["env.d.ts", "src/**/*", "generated/**/*", "src/**/*.vue"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "#/*": ["./generated/*"]
-    }
+    },
+    "verbatimModuleSyntax": true,
+    "isolatedModules": false
   },
 
   "references": [
