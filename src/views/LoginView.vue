@@ -20,7 +20,7 @@
       const token: string = response;
       if (token.startsWith("ey"))
       {
-        localStorage.setItem('jwtToken',  `Bearer ${token}`);
+        localStorage.setItem('jwtToken',  token);
         router.push('/')
       }
     })

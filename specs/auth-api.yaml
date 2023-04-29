@@ -58,13 +58,15 @@ paths:
                 type: string
 
   /authenticate:
-    parameters:
-      - in: header
-        name: Authorization
-        schema:
-          type: string
-        required: true
     get:
+      security:
+        - bearerAuth: [ ]
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
       operationId: authenticate
       tags:
         - Auth
@@ -80,6 +82,11 @@ paths:
 
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     User:
       type: object
