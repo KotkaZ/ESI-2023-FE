@@ -9,7 +9,7 @@ export interface User {
 }
 
 export interface AuthFunctions {
-    isAuthenticated: () => boolean;
+    isAuthenticated: () => Promise<boolean>;
     hasRoleOf: (roles: string) => boolean;
     logout: () => void;
 }
@@ -23,7 +23,7 @@ export function useAuth(): AuthFunctions {
         username: ""
     })
 
-    const isAuthenticated = (): boolean => {
+    const isAuthenticated = async (): Promise<boolean> => {
         const token = localStorage.getItem('jwtToken');
 
         if (!token) {
@@ -32,11 +32,12 @@ export function useAuth(): AuthFunctions {
 
         user.value.roles = jwtDecode<User>(token).roles;
 
-        authApi.authenticate({authorization: token})
+        await authApi.authenticate({authorization: token})
             .then((response) => {
                 user.value.authenticated = response
-            }).catch(err => console.log(err.message));
-
+            })
+            .catch(err => console.log(err.message));
+        
         return user.value.authenticated;
     }
 
