@@ -1,6 +1,7 @@
 import jwtDecode from 'jwt-decode'
 import { useServices } from './useServices'
 import { ref, type Ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export interface User {
   authenticated: boolean
@@ -17,6 +18,7 @@ export interface AuthFunctions {
 
 export function useAuth(): AuthFunctions {
   const { authApi } = useServices()
+  const router = useRouter()
 
   const user: Ref<User> = ref({
     authenticated: false,
@@ -50,6 +52,7 @@ export function useAuth(): AuthFunctions {
   const logout = (): void => {
     localStorage.removeItem('jwtToken')
     user.value = { roles: '', username: '', authenticated: false }
+    router.push("/login")
   }
 
   const setToken = (token: string): void => {
