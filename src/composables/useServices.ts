@@ -21,25 +21,25 @@ export function useServices() {
 
   const authConfiguration: AuthConfiguration = new AuthConfiguration({
     accessToken
-  });
+  })
   const bookingConfiguration: BookingConfiguration = new BookingConfiguration({
     accessToken
-  });
+  })
   const checkingConfiguration: CheckingConfiguration = new CheckingConfiguration({
     accessToken
-  });
+  })
   const notificationsConfiguration: NotificationsConfiguration = new NotificationsConfiguration({
     accessToken
-  });
+  })
   const paymentsConfiguration: PaymentsConfiguration = new PaymentsConfiguration({
     accessToken
-  });
+  })
   const roomsConfiguration: RoomsConfiguration = new RoomsConfiguration({
     accessToken
-  });
+  })
   const supportConfiguration: SupportConfiguration = new SupportConfiguration({
     accessToken
-  });
+  })
 
   const authApi: AuthApi = new AuthApi(authConfiguration)
   const bookingApi: BookingApi = new BookingApi(bookingConfiguration)
