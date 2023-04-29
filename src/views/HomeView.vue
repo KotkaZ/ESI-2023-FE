@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useServices } from '@/composables/useServices'
-import TheWelcome from '../components/TheWelcome.vue'
+import TheWelcome from '@/components/TheWelcome.vue'
 
 const { roomsApi } = useServices()
 
