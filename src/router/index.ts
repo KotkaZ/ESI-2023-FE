@@ -5,14 +5,13 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
 import { useAuth } from '@/composables/useAuth'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: HomeView
     },
     {
       path: '/about',
@@ -20,22 +19,24 @@ const router = createRouter({
       component: AboutView
     },
     {
-      path: "/signup",
-      name: "Signup",
-      component: SignupView,
+      path: '/signup',
+      name: 'Signup',
+      component: SignupView
     },
     {
-      path: "/login",
-      name: "Login",
-      component: LoginView,
-    },
+      path: '/login',
+      name: 'Login',
+      component: LoginView
+    }
   ]
 })
 
 router.beforeEach(async (to, from) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth()
+  const authenticated = await isAuthenticated()
 
-  if (!isAuthenticated() && to.name !== 'Login' && to.name !== 'Signup') {
+  if (!authenticated && to.name !== 'Login' && to.name !== 'Signup') {
+    console.log("test12313")
     return { name: 'Login' }
   }
 })
