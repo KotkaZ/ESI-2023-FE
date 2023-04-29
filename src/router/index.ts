@@ -36,7 +36,6 @@ router.beforeEach(async (to, from) => {
   const authenticated = await isAuthenticated()
 
   if (!authenticated && to.name !== 'Login' && to.name !== 'Signup') {
-    console.log("test12313")
     return { name: 'Login' }
   }
 })
