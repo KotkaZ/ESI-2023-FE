@@ -13,11 +13,14 @@
     "codegen": "rimraf generated && openapi-generator-cli generate"
   },
   "dependencies": {
+    "bootstrap": "^5.2.3",
+    "bootstrap-vue": "^2.23.1",
+    "jwt-decode": "^3.1.2",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6",
-    "jwt-decode": "^3.1.2"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.6.0",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/node": "^18.16.3",
     "@vitejs/plugin-vue": "^4.2.1",
@@ -28,10 +31,9 @@
     "eslint-plugin-vue": "^9.11.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.3",
-    "vue-tsc": "^1.6.1",
-    "@openapitools/openapi-generator-cli": "^2.6.0",
-    "rimraf": "^5.0.0"
+    "vue-tsc": "^1.6.1"
   }
 }

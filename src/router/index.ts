@@ -31,7 +31,7 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach(async (to) => {
   const { isAuthenticated } = useAuth()
   const authenticated = await isAuthenticated()
 

@@ -1,17 +1,17 @@
 <script setup lang="ts">
+import type { Room } from '#/rooms'
 import { useServices } from '@/composables/useServices'
-import TheWelcome from '@/components/TheWelcome.vue'
-
+import { ref, type Ref } from 'vue'
 const { roomsApi } = useServices()
+
+const rooms: Ref<Room[]> = ref([])
 
 roomsApi
   .getRooms()
-  .then((response) => console.log(response))
+  .then((response) => (rooms.value = response))
   .catch((error) => console.log(error))
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  {{ rooms }}
 </template>
