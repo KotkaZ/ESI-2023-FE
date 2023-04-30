@@ -5,24 +5,13 @@ import LogoutButton from './LogoutButton.vue'
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Hotel System</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <RouterLink to="/" class="nav-link">Home</RouterLink>
+    <div class="container">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <RouterLink to="/" class="nav-link active">Home</RouterLink>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <RouterLink to="/about" class="nav-link">About</RouterLink>
         </li>
       </ul>
