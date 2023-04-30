@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { User } from '#/auth'
-import { useAuth } from '@/composables/useAuth'
+import { Role, useAuth } from '@/composables/useAuth'
 import { useServices } from '@/composables/useServices'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -11,13 +11,13 @@ const router = useRouter()
 
 const username = ref('')
 const password = ref('')
-const roles = ref('')
+const role = ref(Role.CLIENT)
 
 const signup = () => {
   const user: User = {
     name: username.value,
     password: password.value,
-    role: roles.value
+    role: role.value
   }
 
   authApi
@@ -46,7 +46,9 @@ const signup = () => {
 
       <div class="form-group">
         <label for="roles">Role</label>
-        <input type="text" name="roles" class="form-control" required v-model="roles" />
+        <select class="form-control" name="roles" required v-model="role">
+          <option v-for="role in Role" :key="role">{{ role }}</option>
+        </select>
       </div>
 
       <div class="mt-3">

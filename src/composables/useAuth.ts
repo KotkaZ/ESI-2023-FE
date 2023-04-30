@@ -2,27 +2,32 @@ import jwtDecode from 'jwt-decode'
 import { useServices } from './useServices'
 import { ref, type Ref } from 'vue'
 
+export enum Role {
+  ADMIN = 'ADMIN',
+  CLIENT = 'CLIENT'
+}
+
 export interface User {
   authenticated: boolean
-  roles: string
+  roles: Role[]
   username: string
 }
 
+const user: Ref<User> = ref({
+  authenticated: false,
+  roles: [],
+  username: ''
+})
+
 export interface AuthFunctions {
   isAuthenticated: () => Promise<boolean>
-  hasRoleOf: (roles: string) => boolean
+  hasRoleOf: (role: Role) => boolean
   setToken: (token: string) => void
   logout: () => void
 }
 
 export function useAuth(): AuthFunctions {
   const { authApi } = useServices()
-
-  const user: Ref<User> = ref({
-    authenticated: false,
-    roles: '',
-    username: ''
-  })
 
   const isAuthenticated = async (): Promise<boolean> => {
     const token = localStorage.getItem('jwtToken')
@@ -43,13 +48,13 @@ export function useAuth(): AuthFunctions {
     return user.value.authenticated
   }
 
-  const hasRoleOf = (roles: string): boolean => {
-    return user.value.roles === roles
+  const hasRoleOf = (role: Role): boolean => {
+    return user.value.roles.includes(role)
   }
 
   const logout = (): void => {
     localStorage.removeItem('jwtToken')
-    user.value = { roles: '', username: '', authenticated: false }
+    user.value = { roles: [], username: '', authenticated: false }
   }
 
   const setToken = (token: string): void => {
