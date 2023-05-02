@@ -14,7 +14,7 @@ roomsApi
   .catch((error) => console.log(error))
 
 const clickDetails = (number: any): void => {
-  router.push('/api/aproduct/' + number)
+  router.push('/rooms/' + number)
 }
 </script>
 

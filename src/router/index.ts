@@ -4,6 +4,7 @@ import AboutView from '@/views/AboutView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
 import SupportView from '@/views/SupportView.vue'
+import RoomView from '@/views/RoomView.vue'
 import { Role, useAuth } from '@/composables/useAuth'
 
 const { hasRoleOf } = useAuth()
@@ -15,6 +16,11 @@ const router = createRouter({
       path: '/',
       name: 'book',
       component: BookView
+    },
+    {
+      path: '/rooms/:id',
+      name: 'room',
+      component: RoomView
     },
     {
       path: '/about',
