@@ -19,6 +19,11 @@ const { hasRoleOf } = useAuth()
           >
         </li>
         <li class="nav-item">
+          <RouterLink to="/bookings" class="nav-link" :class="{ active: route.path === '/bookings' }"
+            >My bookings</RouterLink
+          >
+        </li>
+        <li class="nav-item">
           <RouterLink to="/about" class="nav-link" :class="{ active: route.path === '/about' }"
             >About</RouterLink
           >

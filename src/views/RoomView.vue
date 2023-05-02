@@ -33,7 +33,7 @@ const checkAvailability = (): void => {
 <template>
   <div class="">
     <div>
-      <h1 class="m-3">A room</h1>
+      <h1 class="m-3">Room details</h1>
 
       <div class="card m-5  bg-light">
         <div class="card-body">
