@@ -4,7 +4,8 @@ import { ref, type Ref } from 'vue'
 
 export enum Role {
   ADMIN = 'ADMIN',
-  CLIENT = 'CLIENT'
+  CLIENT = 'CLIENT',
+  SUPPORT = 'SUPPORT'
 }
 
 export interface User {

@@ -13,24 +13,37 @@ const { hasRoleOf } = useAuth()
 
     <div class="container">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" v-if= "hasRoleOf(Role.CLIENT)">
           <RouterLink to="/" class="nav-link" :class="{ active: route.path === '/' }"
             >Book</RouterLink
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="hasRoleOf(Role.CLIENT)">
           <RouterLink to="/bookings" class="nav-link" :class="{ active: route.path === '/bookings' }"
             >My bookings</RouterLink
+          >
+        </li>
+
+        <li class="nav-item" v-if="hasRoleOf(Role.ADMIN)">
+          <RouterLink to="/rooms" class="nav-link" :class="{ active: route.path === '/rooms' }"
+            >Rooms</RouterLink
+          >
+        </li>
+
+        <li class="nav-item" v-if="hasRoleOf(Role.ADMIN)">
+          <RouterLink to="/allbookings" class="nav-link" :class="{ active: route.path === '/allbookings' }"
+            >All Bookings</RouterLink
+          >
+        </li>
+        
+        <li class="nav-item" v-if="hasRoleOf(Role.ADMIN) || hasRoleOf(Role.SUPPORT)">
+          <RouterLink to="/support" class="nav-link" :class="{ active: route.path === '/support' }"
+            >Support</RouterLink
           >
         </li>
         <li class="nav-item">
           <RouterLink to="/about" class="nav-link" :class="{ active: route.path === '/about' }"
             >About</RouterLink
-          >
-        </li>
-        <li class="nav-item" v-if="hasRoleOf(Role.ADMIN)">
-          <RouterLink to="/support" class="nav-link" :class="{ active: route.path === '/support' }"
-            >Support</RouterLink
           >
         </li>
       </ul>
