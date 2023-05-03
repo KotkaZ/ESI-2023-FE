@@ -20,7 +20,10 @@ roomsApi
   .then((response) => (room.value = response))
   .catch((error) => console.log(error))
 
-const bookRoom = (roomid:any): void => {
+const bookRoom = (roomid:any, roomPrice:any): void => {
+  var diff = new Date(endDate.value).valueOf() - new Date(startDate.value).valueOf();
+  var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+  
   const bookingDetails: BookingCreate = {
         userId: userId,
         roomId: roomid,
@@ -28,7 +31,7 @@ const bookRoom = (roomid:any): void => {
         startDate: new Date(startDate.value),
         endDate: new Date(endDate.value),
         bookDate: new Date(),
-        price: 123
+        price: diffDays*roomPrice
       }
 
   bookingApi
@@ -68,7 +71,7 @@ const checkAvailability = (): void => {
           <button type="button" @click="checkAvailability()" class="btn btn-primary mt-2">Check availability</button>
 
           <div>Is the room available: {{ available }}</div>
-          <button type="button" :disabled="!available" @click="bookRoom(room?.roomNumber)" class="btn btn-primary mt-2"> Book</button>
+          <button type="button" :disabled="!available" @click="bookRoom(room?.roomNumber, room?.price)" class="btn btn-primary mt-2"> Book</button>
         </div>
       </div>
 
