@@ -20,6 +20,8 @@ bookingApi
 
 const deleteBooking = (): void => {
   bookingApi.cancelBooking({ id: Number(route.params.id) })
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error))
   router.go(0)
 }
 
