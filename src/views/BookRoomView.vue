@@ -56,8 +56,9 @@ const checkAvailability = (): void => {
       <div class="card bg-light">
         <div class="card-body">
           <h5 class="card-title">{{ room == null ? "Loading..." : room.description }}</h5>
-          <p class="card-text">Price per night: {{ room == null ? "Loading..." : room.price }} <br /> Max number of
-            guests: {{ room == null ? "Loading..." : room.guestsMaxNumber }}</p>
+          <p class="card-text">
+            Price per night: {{ room == null ? "Loading..." : room.price }} <br /> 
+            Max number of guests: {{ room == null ? "Loading..." : room.guestsMaxNumber }}</p>
 
           <div class="form-group">
             <label for="exampleInputEmail1">Start:</label>

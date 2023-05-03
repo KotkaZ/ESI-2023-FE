@@ -4,6 +4,7 @@ import AboutView from '@/views/AboutView.vue'
 import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
 import SupportView from '@/views/SupportView.vue'
+import SupportRequestView from '@/views/SupportRequestView.vue'
 import RoomView from '@/views/RoomView.vue'
 import BookRoomView from '@/views/BookRoomView.vue'
 import MyBookingsView from '@/views/MyBookingsView.vue'
@@ -72,6 +73,14 @@ const router = createRouter({
       path: '/support',
       name: 'support',
       component: SupportView,
+      beforeEnter: () => {
+        return hasRoleOf(Role.ADMIN) || hasRoleOf(Role.SUPPORT)
+      }
+    },
+    {
+      path: '/support/:id',
+      name: 'supportRequest',
+      component: SupportRequestView,
       beforeEnter: () => {
         return hasRoleOf(Role.ADMIN) || hasRoleOf(Role.SUPPORT)
       }

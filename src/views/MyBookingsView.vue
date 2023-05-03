@@ -16,7 +16,6 @@ bookingApi
   .catch((error) => console.log(error))
 
 const clickDetails = (number:any): void => {
-  console.log(userId)
   router.push('/bookings/' + number)
 }
 </script>
