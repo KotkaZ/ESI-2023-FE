@@ -15,8 +15,9 @@ bookingApi
   .then((response) => (bookings.value = response))
   .catch((error) => console.log(error))
 
-const clickDetails = (): void => {
-  // router.push('/rooms/' + number)
+const clickDetails = (number:any): void => {
+  console.log(userId)
+  router.push('/bookings/' + number)
 }
 </script>
 
@@ -28,10 +29,10 @@ const clickDetails = (): void => {
         <div class="" v-for="booking in bookings" :key="booking.id">
           <div class="card m-5 bg-light">
             <div class="card-body">
-              <h5 class="card-title">{{ booking.bookDate }}</h5>
-              <p class="card-text">Price per night:</p>
-              <p class="card-text"></p>
-              <button type="button" @click="clickDetails()" class="btn btn-primary">Details</button>
+              <h5 class="card-title">Room number: {{ booking.roomId }}</h5>
+              <p class="card-text">Price per night: {{ booking.price }} <br /> Start date: {{ booking.startDate }} <br />
+                End date: {{ booking.endDate }} <br /> Status: {{ booking.status }}</p>
+              <button type="button" @click="clickDetails(booking.id)" class="btn btn-primary">Details</button>
             </div>
           </div>
         </div>
