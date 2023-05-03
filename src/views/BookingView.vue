@@ -74,12 +74,15 @@ const checkOut = (): void => {
 
           <div class="d-flex justify-content-between mt-3">
             <div>
-              <button type="button" :disabled="checking?.checkInAt !== undefined" @click="checkIn()" class="btn btn-primary m-1">Check in</button>
-              <button type="button" :disabled="checking?.checkInAt == undefined || checking?.checkOutAt !== undefined" @click="checkOut()" class="btn btn-primary m-1">Check out</button>
+              <button type="button" :disabled="checking?.checkInAt !== undefined" @click="checkIn()"
+                class="btn btn-primary m-1">Check in</button>
+              <button type="button" :disabled="checking?.checkInAt == undefined || checking?.checkOutAt !== undefined"
+                @click="checkOut()" class="btn btn-primary m-1">Check out</button>
             </div>
 
-            <button type="button" :disabled="booking?.status == BookingStatusEnum.CANCELLED || checking?.checkInAt !== undefined || checking?.checkOutAt !== undefined" @click="deleteBooking()"
-              class="btn btn-secondary m-1"> Cancel booking </button>
+            <button type="button"
+              :disabled="booking?.status == BookingStatusEnum.CANCELLED || checking?.checkInAt !== undefined || checking?.checkOutAt !== undefined"
+              @click="deleteBooking()" class="btn btn-secondary m-1"> Cancel booking </button>
           </div>
 
         </div>
@@ -87,5 +90,4 @@ const checkOut = (): void => {
 
 
     </div>
-  </div>
-</template>
+  </div></template>

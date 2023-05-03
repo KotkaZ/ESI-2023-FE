@@ -2,9 +2,8 @@
 import type { Room } from '#/rooms'
 import { useServices } from '@/composables/useServices'
 import { ref, type Ref } from 'vue'
-import { useAuth } from '@/composables/useAuth'
 import { useRouter, useRoute } from 'vue-router'
-const { roomsApi, bookingApi } = useServices()
+const { roomsApi } = useServices()
 const route = useRoute();
 const router = useRouter()
 
@@ -60,8 +59,8 @@ const editRoom = (): void => {
 <template>
   <div class="row">
     <div class="mx-auto col-8 col-md-5 col-lg-3">
-      <h3 :hidden="route.params.id !== undefined" >Create new room</h3>
-      <h3 :hidden="route.params.id == undefined" >Edit room</h3>
+      <h3 :hidden="route.params.id !== undefined">Create new room</h3>
+      <h3 :hidden="route.params.id == undefined">Edit room</h3>
       <div class="card bg-light">
         <div class="card-body">
 

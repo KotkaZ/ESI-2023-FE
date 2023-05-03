@@ -15,7 +15,7 @@ bookingApi
   .then((response) => (bookings.value = response))
   .catch((error) => console.log(error))
 
-const clickDetails = (number:any): void => {
+const clickDetails = (number: any): void => {
   router.push('/bookings/' + number)
 }
 </script>
@@ -29,7 +29,8 @@ const clickDetails = (number:any): void => {
           <div class="card m-5 bg-light">
             <div class="card-body">
               <h5 class="card-title"> Booking id: {{ booking.id }}</h5>
-              <p class="card-text">Room number: {{ booking.roomId }} <br/> Price per night: {{ booking.price }} <br /> Start date: {{ booking.startDate }} <br />
+              <p class="card-text">Room number: {{ booking.roomId }} <br /> Price per night: {{ booking.price }} <br />
+                Start date: {{ booking.startDate }} <br />
                 End date: {{ booking.endDate }} <br /> Status: {{ booking.status }}</p>
               <button type="button" @click="clickDetails(booking.id)" class="btn btn-primary">Details</button>
             </div>

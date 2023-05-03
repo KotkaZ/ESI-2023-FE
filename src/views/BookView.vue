@@ -16,21 +16,21 @@ roomsApi
   .catch((error) => console.log(error))
 
 const clickDetails = (number: any): void => {
-  router.push('/rooms/' + number)
+  router.push('/bookRoom/' + number)
 }
 
 const createRoom = (): void => {
   router.push('/rooms')
 }
 
-const deleteRoom = (roomid:any): void => {
-  roomsApi.removeRoom({ id:  roomid})
+const deleteRoom = (roomid: any): void => {
+  roomsApi.removeRoom({ id: roomid })
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
   router.go(0)
 }
 
-const editRoom = (number:any): void => {
+const editRoom = (number: any): void => {
   router.push('/rooms/' + number)
 }
 
@@ -48,9 +48,12 @@ const editRoom = (number:any): void => {
             <p class="card-text">Price per night: {{ room.price }} <br /> Max number of guests: {{ room.guestsMaxNumber }}
             </p>
 
-            <button type="button" :hidden="hasRoleOf(Role.ADMIN)" @click="clickDetails(room.roomNumber)" class="btn btn-primary"> Details</button>
-            <button type="button" :hidden="hasRoleOf(Role.CLIENT)" @click="editRoom(room.roomNumber)" class="btn btn-primary"> Edit Room</button>
-            <button type="button" :hidden="hasRoleOf(Role.CLIENT)" @click="deleteRoom(room.roomNumber)" class="btn btn-primary m-2"> Delete Room</button>
+            <button type="button" :hidden="hasRoleOf(Role.ADMIN)" @click="clickDetails(room.roomNumber)"
+              class="btn btn-primary"> Details</button>
+            <button type="button" :hidden="hasRoleOf(Role.CLIENT)" @click="editRoom(room.roomNumber)"
+              class="btn btn-primary"> Edit Room</button>
+            <button type="button" :hidden="hasRoleOf(Role.CLIENT)" @click="deleteRoom(room.roomNumber)"
+              class="btn btn-primary m-2"> Delete Room</button>
           </div>
         </div>
       </div>
@@ -59,5 +62,4 @@ const editRoom = (number:any): void => {
   <div class="m-5">
     <button type="button" :hidden="hasRoleOf(Role.CLIENT)" @click="createRoom()" class="btn btn-primary"> Create
       room</button>
-  </div>
-</template>
+  </div></template>

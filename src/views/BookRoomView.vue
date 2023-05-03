@@ -7,7 +7,6 @@ import { useRouter, useRoute } from 'vue-router'
 const { roomsApi, bookingApi } = useServices()
 import { BookingCreateStatusEnum, type BookingCreate } from '#/bookings/models';
 const route = useRoute();
-const router = useRouter()
 const { userId } = useAuth()
 
 const room: Ref<Room | null> = ref(null)
@@ -20,22 +19,22 @@ roomsApi
   .then((response) => (room.value = response))
   .catch((error) => console.log(error))
 
-const bookRoom = (roomid:any, roomPrice:any): void => {
+const bookRoom = (roomid: any, roomPrice: any): void => {
   var diff = new Date(endDate.value).valueOf() - new Date(startDate.value).valueOf();
-  var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-  
+  var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+
   const bookingDetails: BookingCreate = {
-        userId: userId,
-        roomId: roomid,
-        status: BookingCreateStatusEnum.CREATED,
-        startDate: new Date(startDate.value),
-        endDate: new Date(endDate.value),
-        bookDate: new Date(),
-        price: diffDays*roomPrice
-      }
+    userId: userId,
+    roomId: roomid,
+    status: BookingCreateStatusEnum.CREATED,
+    startDate: new Date(startDate.value),
+    endDate: new Date(endDate.value),
+    bookDate: new Date(),
+    price: diffDays * roomPrice
+  }
 
   bookingApi
-    .createBooking({bookingCreate: bookingDetails})
+    .createBooking({ bookingCreate: bookingDetails })
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
 }
@@ -57,7 +56,7 @@ const checkAvailability = (): void => {
         <div class="card-body">
           <h5 class="card-title">{{ room == null ? "Loading..." : room.description }}</h5>
           <p class="card-text">
-            Price per night: {{ room == null ? "Loading..." : room.price }} <br /> 
+            Price per night: {{ room == null ? "Loading..." : room.price }} <br />
             Max number of guests: {{ room == null ? "Loading..." : room.guestsMaxNumber }}</p>
 
           <div class="form-group">
@@ -72,7 +71,8 @@ const checkAvailability = (): void => {
           <button type="button" @click="checkAvailability()" class="btn btn-primary mt-2">Check availability</button>
 
           <div>Is the room available: {{ available }}</div>
-          <button type="button" :disabled="!available" @click="bookRoom(room?.roomNumber, room?.price)" class="btn btn-primary mt-2"> Book</button>
+          <button type="button" :disabled="!available" @click="bookRoom(room?.roomNumber, room?.price)"
+            class="btn btn-primary mt-2"> Book</button>
         </div>
       </div>
 
