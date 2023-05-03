@@ -25,7 +25,7 @@ const { hasRoleOf } = useAuth()
         </li>
 
         <li class="nav-item" v-if="hasRoleOf(Role.ADMIN)">
-          <RouterLink to="/rooms" class="nav-link" :class="{ active: route.path === '/rooms' }"
+          <RouterLink to="/" class="nav-link" :class="{ active: route.path === '/' }"
             >Rooms</RouterLink
           >
         </li>

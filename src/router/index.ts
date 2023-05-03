@@ -5,6 +5,7 @@ import LoginView from '@/views/LoginView.vue'
 import SignupView from '@/views/SignupView.vue'
 import SupportView from '@/views/SupportView.vue'
 import RoomView from '@/views/RoomView.vue'
+import BookRoomView from '@/views/BookRoomView.vue'
 import MyBookingsView from '@/views/MyBookingsView.vue'
 import BookingView from '@/views/BookingView.vue'
 import { Role, useAuth } from '@/composables/useAuth'
@@ -17,22 +18,50 @@ const router = createRouter({
     {
       path: '/',
       name: 'book',
-      component: BookView
+      component: BookView,
+      beforeEnter: () => {
+        return hasRoleOf(Role.CLIENT) || hasRoleOf(Role.ADMIN)
+      }
+    },
+    {
+      path: '/rooms',
+      name: 'createRoom',
+      component: RoomView,
+      beforeEnter: () => {
+        return hasRoleOf(Role.ADMIN)
+      }
     },
     {
       path: '/rooms/:id',
       name: 'room',
-      component: RoomView
+      component: RoomView,
+      beforeEnter: () => {
+        return hasRoleOf(Role.ADMIN)
+      }
+    },
+    {
+      path: '/bookRoom/:id',
+      name: 'bookRoom',
+      component: BookRoomView,
+      beforeEnter: () => {
+        return hasRoleOf(Role.CLIENT)
+      }
     },
     {
       path: '/bookings',
       name: 'mybookings',
-      component: MyBookingsView
+      component: MyBookingsView,
+      beforeEnter: () => {
+        return hasRoleOf(Role.CLIENT)
+      }
     },
     {
       path: '/bookings/:id',
       name: 'booking',
-      component: BookingView
+      component: BookingView,
+      beforeEnter: () => {
+        return hasRoleOf(Role.CLIENT)
+      }
     },
     {
       path: '/about',
@@ -44,7 +73,7 @@ const router = createRouter({
       name: 'support',
       component: SupportView,
       beforeEnter: () => {
-        return hasRoleOf(Role.ADMIN)
+        return hasRoleOf(Role.ADMIN) || hasRoleOf(Role.SUPPORT)
       }
     },
     {
