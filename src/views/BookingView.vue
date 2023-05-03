@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Booking } from '#/bookings'
+import { BookingStatusEnum, type Booking } from '#/bookings'
 import type { Room } from '#/rooms'
 import { useServices } from '@/composables/useServices'
 import { ref, type Ref } from 'vue'
@@ -51,7 +51,7 @@ const deleteBooking = (): void => {
             guests: {{ room == null ? "Loading..." : room.guestsMaxNumber }}</p>
 
           <div class="d-flex justify-content-between mt-3">
-            <button type="button" @click="deleteBooking()" class="btn btn-secondary">
+            <button type="button" :disabled="booking?.status == BookingStatusEnum.CANCELLED" @click="deleteBooking()" class="btn btn-secondary">
               Cancel booking
             </button>
           </div>
