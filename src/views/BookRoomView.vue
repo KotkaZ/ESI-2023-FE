@@ -20,8 +20,8 @@ roomsApi
   .catch((error) => console.log(error))
 
 const bookRoom = (roomid: any, roomPrice: any): void => {
-  var diff = new Date(endDate.value).valueOf() - new Date(startDate.value).valueOf();
-  var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+  const diff = new Date(endDate.value).valueOf() - new Date(startDate.value).valueOf();
+  const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
 
   const bookingDetails: BookingCreate = {
     userId: userId,
@@ -54,18 +54,18 @@ const checkAvailability = (): void => {
       <h3>View room details</h3>
       <div class="card bg-light">
         <div class="card-body">
-          <h5 class="card-title">{{ room == null ? "Loading..." : room.description }}</h5>
+          <h5 class="card-title">{{ !room ? "Loading..." : room.description }}</h5>
           <p class="card-text">
-            Price per night: {{ room == null ? "Loading..." : room.price }} <br />
-            Max number of guests: {{ room == null ? "Loading..." : room.guestsMaxNumber }}</p>
+            Price per night: {{ !room ? "Loading..." : room.price }} <br />
+            Max number of guests: {{ !room ? "Loading..." : room.guestsMaxNumber }}</p>
 
           <div class="form-group">
-            <label for="exampleInputEmail1">Start:</label>
+            <label>Start:</label>
             <input type="date" class="form-control" required v-model="startDate">
 
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">End:</label>
+            <label>End:</label>
             <input type="date" class="form-control" required v-model="endDate">
           </div>
           <button type="button" @click="checkAvailability()" class="btn btn-primary mt-2">Check availability</button>

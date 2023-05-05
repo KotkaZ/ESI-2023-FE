@@ -59,8 +59,8 @@ const editRoom = (): void => {
 <template>
   <div class="row">
     <div class="mx-auto col-8 col-md-5 col-lg-3">
-      <h3 :hidden="route.params.id !== undefined">Create new room</h3>
-      <h3 :hidden="route.params.id == undefined">Edit room</h3>
+      <h3 v-if="!route.params.id">Create new room</h3>
+      <h3 v-if="route.params.id">Edit room</h3>
       <div class="card bg-light">
         <div class="card-body">
 
@@ -81,9 +81,9 @@ const editRoom = (): void => {
             <input type="number" class="form-control" required v-model="guestsMaxNumber">
           </div>
 
-          <button type="button" :hidden="route.params.id !== undefined" @click="createRoom()"
-            class="btn btn-primary mt-2"> Create room</button>
-          <button type="button" :hidden="route.params.id == undefined" @click="editRoom()" class="btn btn-primary mt-2">
+          <button type="button" v-if="!route.params.id" @click="createRoom()" class="btn btn-primary mt-2">
+            Create room</button>
+          <button type="button" v-if="route.params.id" @click="editRoom()" class="btn btn-primary mt-2">
             Edit room</button>
         </div>
       </div>

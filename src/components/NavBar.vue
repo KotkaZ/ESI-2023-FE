@@ -29,21 +29,10 @@ const { hasRoleOf } = useAuth()
             >Rooms</RouterLink
           >
         </li>
-
-        <li class="nav-item" v-if="hasRoleOf(Role.ADMIN)">
-          <RouterLink to="/allbookings" class="nav-link" :class="{ active: route.path === '/allbookings' }"
-            >All Bookings</RouterLink
-          >
-        </li>
         
         <li class="nav-item" v-if="hasRoleOf(Role.ADMIN) || hasRoleOf(Role.SUPPORT)">
           <RouterLink to="/support" class="nav-link" :class="{ active: route.path === '/support' }"
             >Support</RouterLink
-          >
-        </li>
-        <li class="nav-item">
-          <RouterLink to="/about" class="nav-link" :class="{ active: route.path === '/about' }"
-            >About</RouterLink
           >
         </li>
       </ul>

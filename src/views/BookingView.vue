@@ -13,40 +13,40 @@ const booking: Ref<Booking | null> = ref(null)
 const room: Ref<Room | null> = ref(null)
 const checking: Ref<Checking | null> = ref(null)
 
+const getBookings = (): void => {
+  bookingApi
+    .getBookingById({ id: Number(route.params.id) })
+    .then((response) => (booking.value = response,
+      roomsApi
+        .getRoomById({ id: response?.roomId ?? 0 })
+        .then((response) => (room.value = response))
+        .catch((error) => console.log(error))))
+    .catch((error) => console.log(error))
 
-bookingApi
-  .getBookingById({ id: Number(route.params.id) })
-  .then((response) => (booking.value = response,
-    roomsApi
-      .getRoomById({ id: response?.roomId ?? 0 })
-      .then((response) => (room.value = response))
-      .catch((error) => console.log(error))))
-  .catch((error) => console.log(error))
-
-checkingApi.getCheckingById({ bookingId: Number(route.params.id) })
-  .then((response) => (checking.value = response))
-  .catch((error) => console.log(error))
+  checkingApi.getCheckingById({ bookingId: Number(route.params.id) })
+    .then((response) => (checking.value = response))
+    .catch((error) => console.log(error))
+}
 
 const deleteBooking = (): void => {
   bookingApi.cancelBooking({ id: Number(route.params.id) })
-    .then((response) => console.log(response))
+    .then((response) => (console.log(response), getBookings()))
     .catch((error) => console.log(error))
-  router.go(0)
 }
 
 const checkIn = (): void => {
   checkingApi.checkinToRooms({ bookingId: Number(route.params.id) })
-    .then((response) => console.log(response))
+    .then((response) => (console.log(response), getBookings()))
     .catch((error) => console.log(error))
-  router.go(0)
 }
 
 const checkOut = (): void => {
   checkingApi.checkoutFromRooms({ bookingId: Number(route.params.id) })
-    .then((response) => console.log(response))
+    .then((response) => (console.log(response), getBookings()))
     .catch((error) => console.log(error))
-  router.go(0)
 }
+
+getBookings()
 
 </script>
 
@@ -56,27 +56,29 @@ const checkOut = (): void => {
       <h3>Booking details</h3>
       <div class="card bg-light">
         <div class="card-body">
-          <h5 class="card-title"> {{ room == null ? "Loading..." : room.description }} </h5>
+          <h5 class="card-title"> {{ !room ? "Loading..." : room.description }} </h5>
           <p class="card-text">
-            Total Price: {{ booking == null ? "Loading..." : booking.price }}<br />
-            Room number: {{ booking == null ? "Loading..." : booking.roomId }} <br />
-            Start date: {{ booking == null ? "Loading..." : booking.startDate }} <br />
-            End date: {{ booking == null ? "Loading..." : booking.endDate }} <br />
-            Status: {{ booking == null ? "Loading..." : booking.status }} <br />
-            Checked-in: {{ checking == null ? "Loading..." : checking.checkInAt }} <br />
-            Checked-out: {{ checking == null ? "Loading..." : checking.checkOutAt }} <br />
-            Code: {{ checking == null ? "Loading..." : (checking.checkInAt == undefined ? "Check in to see the code" :
+            Total Price: {{ !booking ? "Loading..." : booking.price }}<br />
+            Room number: {{ !booking ? "Loading..." : booking.roomId }} <br />
+            Start date: {{ !booking ? "Loading..." : booking.startDate }} <br />
+            End date: {{ !booking ? "Loading..." : booking.endDate }} <br />
+            Status: {{ !booking ? "Loading..." : booking.status }} <br />
+            Checked-in: {{ !checking ? "Loading..." : checking.checkInAt }} <br />
+            Checked-out: {{ !checking ? "Loading..." : checking.checkOutAt }} <br />
+            Code: {{ !checking ? "Loading..." : (!checking.checkInAt ? "Check in to see the code" :
               checking.code) }} <br /> <br />
 
           <h5>Room info: </h5>
-          Price per night: {{ room == null ? "Loading..." : room.price }} <br />
-          Max number of guests: {{ room == null ? "Loading..." : room.guestsMaxNumber }}</p>
+          Price per night: {{ !room ? "Loading..." : room.price }} <br />
+          Max number of guests: {{ !room ? "Loading..." : room.guestsMaxNumber }}</p>
 
           <div class="d-flex justify-content-between mt-3">
             <div>
-              <button type="button" :disabled="checking?.checkInAt !== undefined" @click="checkIn()"
-                class="btn btn-primary m-1">Check in</button>
-              <button type="button" :disabled="checking?.checkInAt == undefined || checking?.checkOutAt !== undefined"
+              <button type="button"
+                :disabled="checking?.checkInAt !== undefined || booking?.status == BookingStatusEnum.CANCELLED"
+                @click="checkIn()" class="btn btn-primary m-1">Check in</button>
+              <button type="button"
+                :disabled="checking?.checkInAt == undefined || checking?.checkOutAt !== undefined || booking?.status == BookingStatusEnum.CANCELLED"
                 @click="checkOut()" class="btn btn-primary m-1">Check out</button>
             </div>
 
@@ -90,4 +92,5 @@ const checkOut = (): void => {
 
 
     </div>
-  </div></template>
+  </div>
+</template>
