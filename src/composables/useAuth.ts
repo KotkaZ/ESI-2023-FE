@@ -4,25 +4,29 @@ import { ref, type Ref } from 'vue'
 
 export enum Role {
   ADMIN = 'ADMIN',
-  CLIENT = 'CLIENT'
+  CLIENT = 'CLIENT',
+  SUPPORT = 'SUPPORT'
 }
 
 export interface User {
   authenticated: boolean
   roles: Role[]
   username: string
+  userId: number
 }
 
 const user: Ref<User> = ref({
   authenticated: false,
   roles: [],
-  username: ''
+  username: '',
+  userId: 0
 })
 
 export interface AuthFunctions {
   isAuthenticated: () => Promise<boolean>
   hasRoleOf: (role: Role) => boolean
   setToken: (token: string) => void
+  userId: number
   logout: () => void
 }
 
@@ -36,7 +40,10 @@ export function useAuth(): AuthFunctions {
       return false
     }
 
-    user.value.roles = jwtDecode<User>(token).roles
+    const decodedToken = jwtDecode<User>(token)
+
+    user.value.roles = decodedToken.roles
+    user.value.userId = decodedToken.userId
 
     await authApi
       .authenticate({ authorization: token })
@@ -54,13 +61,14 @@ export function useAuth(): AuthFunctions {
 
   const logout = (): void => {
     localStorage.removeItem('jwtToken')
-    user.value = { roles: [], username: '', authenticated: false }
+    user.value = { roles: [], username: '', authenticated: false, userId: 0 }
   }
 
   const setToken = (token: string): void => {
     if (token.startsWith('ey')) {
       const decodedToken = jwtDecode<User>(token)
       user.value.roles = decodedToken.roles
+      user.value.userId = decodedToken.userId
 
       localStorage.setItem('jwtToken', token)
     }
@@ -70,6 +78,7 @@ export function useAuth(): AuthFunctions {
     isAuthenticated,
     hasRoleOf,
     logout,
-    setToken
+    setToken,
+    userId: user.value.userId
   }
 }

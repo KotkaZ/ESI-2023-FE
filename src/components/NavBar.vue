@@ -9,21 +9,28 @@ const { hasRoleOf } = useAuth()
 
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Hotel System</a>
+    <a class="navbar-brand m-2" href="#">Hotel System</a>
 
     <div class="container">
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item" v-if= "hasRoleOf(Role.CLIENT)">
           <RouterLink to="/" class="nav-link" :class="{ active: route.path === '/' }"
-            >Home</RouterLink
+            >Book</RouterLink
           >
         </li>
-        <li class="nav-item">
-          <RouterLink to="/about" class="nav-link" :class="{ active: route.path === '/about' }"
-            >About</RouterLink
+        <li class="nav-item" v-if="hasRoleOf(Role.CLIENT)">
+          <RouterLink to="/bookings" class="nav-link" :class="{ active: route.path === '/bookings' }"
+            >My bookings</RouterLink
           >
         </li>
+
         <li class="nav-item" v-if="hasRoleOf(Role.ADMIN)">
+          <RouterLink to="/" class="nav-link" :class="{ active: route.path === '/' }"
+            >Rooms</RouterLink
+          >
+        </li>
+        
+        <li class="nav-item" v-if="hasRoleOf(Role.ADMIN) || hasRoleOf(Role.SUPPORT)">
           <RouterLink to="/support" class="nav-link" :class="{ active: route.path === '/support' }"
             >Support</RouterLink
           >
