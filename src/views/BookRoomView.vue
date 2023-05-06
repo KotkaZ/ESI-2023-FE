@@ -8,6 +8,7 @@ const { roomsApi, bookingApi } = useServices()
 import { BookingCreateStatusEnum, type BookingCreate } from '#/bookings/models';
 const route = useRoute();
 const { userId } = useAuth()
+const router = useRouter()
 
 const room: Ref<Room | null> = ref(null)
 const startDate = ref('')
@@ -37,6 +38,8 @@ const bookRoom = (roomid: any, roomPrice: any): void => {
     .createBooking({ bookingCreate: bookingDetails })
     .then((response) => console.log(response))
     .catch((error) => console.log(error))
+  
+  router.push('/bookings')
 }
 
 const checkAvailability = (): void => {
