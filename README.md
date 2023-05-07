@@ -1,46 +1,40 @@
-# ESI-2023-FE
+# Online Hotel Management 
+This Vue 3 project focuses on implementing a user interface for an online hotel management system. 
 
-This template should help get you started developing with Vue 3 in Vite.
+## Project Overview
+The online hotel management system aims to provide a comprehensive platform for managing hotel operations, reservations, room availability, and customer bookings. The project demonstrates the use of microservices architecture, load balancing techniques, and enterprise system integration to ensure a robust and efficient system.
 
-## Recommended IDE Setup
+## Requirements
+* Java 17
+* Node 18.16.0
+* Npm 9.5.1
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Getting started
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+Install all the neccesasry dependencies
+```bash
+npm ci 
 ```
 
-### Compile and Hot-Reload for Development
 
-```sh
+Generate the Fetch clients
+```bash
+npm run codegen
+```
+
+Compile and Hot-Reload for Development
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+Type-Check, Compile and Minify for Production
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
 
-```sh
+Lint with [ESLint](https://eslint.org/)
+```bash
 npm run lint
 ```
+
